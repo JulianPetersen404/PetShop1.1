@@ -20,16 +20,18 @@ namespace PetShop1._1.UI
             _petService = petService;
             _petTypeService = petTypeService;
         }
-
         public void Start()
         {
             _petService.GetPets();
-            Console.WriteLine(StringConstants.WelcomeMessage);
-            Thread.Sleep(200);
+            foreach (var c in StringConstants.WelcomeMessage)
+            {
+                Console.Write(c);
+                Thread.Sleep(25);
+            }
+            Thread.Sleep(2000);
             Console.WriteLine(StringConstants.Menu);
             DefaultLoop();
         }
-
         private void DefaultLoop()
         {
             int input;
@@ -52,9 +54,54 @@ namespace PetShop1._1.UI
                 {
                     DeletePet();
                 }
+
+                if (input == 5)
+                {
+                    ShowPetsByType();
+                }
+
+                if (input == 6)
+                {
+                    PetsSortedByPrice();
+                }
+                if (input == 7)
+                {
+                    TopFiveCheapestPets();
+                }
             }
         }
-        
+        public void TopFiveCheapestPets()
+        {
+            List<Pet> pets = _petService.ReadPets().OrderBy(p=> p.Price).ToList();
+            
+            foreach (var p in pets.GetRange(0,5))
+            { 
+                printPetInformations(p);
+            }
+            ShowMainMenu();
+        }
+        public void PetsSortedByPrice()
+        {
+            List<Pet> pets = _petService.ReadPets().OrderByDescending(p => p.Price).ThenBy(p => p.Name).ToList();
+            foreach (var p in pets)
+            {
+                printPetInformations(p);
+            }
+            ShowMainMenu();
+        }
+        public void ShowPetsByType()
+        {
+            List<Pet> pets = _petService.ReadPets();
+            Console.WriteLine(StringConstants.ShowPetsByType);
+            printAllTypes();
+            int id = StringToInt(Console.ReadLine());
+            
+            foreach (var pet in pets.Where(p => p.Type.ID == id))
+            {
+                printPetInformations(pet);
+            }
+            ShowMainMenu();
+        }
         private void ShowAllPets()
         {
             List<Pet> pets = _petService.ReadPets();
@@ -160,7 +207,6 @@ namespace PetShop1._1.UI
             }
             ShowMainMenu();
         }
-        
         private void printPetInformations(Pet pet)
         {
             Console.WriteLine($"ID: {pet.ID}. | Name: {pet.Name}. | Birthday: {pet.Birthday}. | Type: {pet.Type.Name}. | Color: {pet.Color}. |" +
@@ -203,7 +249,6 @@ namespace PetShop1._1.UI
             }
             return -1;
         }
-
         private void ShowMainMenu()
         {
             int choice = 1;
@@ -214,7 +259,6 @@ namespace PetShop1._1.UI
             }
             MainMenu();
         }
-
         private void MainMenu()
         {
             Console.Clear();

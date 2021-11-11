@@ -66,7 +66,47 @@ namespace Data
                 Color = "Purple",
                 Price = 9999.99
             }; allPets.Add(pet3);
-
+            
+            Pet pet4 = new Pet
+            {
+                ID = 4,
+                Name = "Andreas",
+                Type = type3,
+                Birthday = DateTime.Now,
+                SoldDate = DateTime.Now,
+                Color = "Green",
+                Price = 1200.98
+            }; allPets.Add(pet4);
+            Pet pet5 = new Pet
+            {
+                ID = 5,
+                Name = "Manfred",
+                Type = type1,
+                Birthday = DateTime.Now,
+                SoldDate = DateTime.Now,
+                Color = "Orange",
+                Price = 10.45,
+            }; allPets.Add(pet5);
+            Pet pet6 = new Pet
+            {
+                ID = 6,
+                Name = "Janina",
+                Type = type3,
+                Birthday = DateTime.Now,
+                SoldDate = DateTime.Now,
+                Color = "Black",
+                Price = 4666.99,
+            }; allPets.Add(pet6);
+            Pet pet7 = new Pet
+            {
+                ID = 7,
+                Name = "Bernd",
+                Type = type1,
+                Birthday = DateTime.Now,
+                SoldDate = DateTime.Now,
+                Color = "Yellow",
+                Price = 99659.99
+            }; allPets.Add(pet7);
             return allPets;
         }
 
