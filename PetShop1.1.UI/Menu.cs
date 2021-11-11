@@ -83,7 +83,7 @@ namespace PetShop1._1.UI
             //Type
             Console.WriteLine(StringConstants.Type);
             printAllTypes();
-            pet.Type = _petTypeService.GetPetType(StringToInt(Console.ReadLine()));
+            pet.Type = _petTypeService.GetPetTypes()[StringToInt(Console.ReadLine())];
             //Birthday
             Console.WriteLine(StringConstants.Birthday);
             string birthDay = Console.ReadLine();
@@ -95,6 +95,7 @@ namespace PetShop1._1.UI
             var parsedSoldD = DateTime.Parse(soldDate);
             pet.SoldDate = parsedSoldD;
             pets.Add(pet);
+            printPetInformations(pet);
             ShowMainMenu();
         }
 
